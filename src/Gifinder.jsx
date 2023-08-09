@@ -1,37 +1,36 @@
 import { useState } from "react"
 import { AddCategory } from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
 
 export const Gifinder = () => {
 
-  const [categories, setCategories] = useState(['One Punch', 'Dragon Ball']);
+  const [categories, setCategories] = useState(['One Punch']);
 
   const onAddCategory = (newCategory) => {
 
-    if(categories.includes(newCategory)) 
+    if (categories.includes(newCategory))
       return;
-      
-    setCategories([newCategory,...categories]);
+
+    setCategories([newCategory, ...categories]);
   }
 
   return (
     <>
-      {/* title */}
       <h1>Gifinder</h1>
 
-      {/* Input */}
       <AddCategory
-        // setCategories={setCategories} 
         onNewCategory={(value) => onAddCategory(value)}
       />
-      {/* Gif list */}
-      <ol>
+
         {
-          categories.map(
-            (category, index) => <li key={index}>{category}</li>
-          )
+          categories.map((category, index) => {
+            console.log(category)
+            return <GifGrid
+              key={index}
+              category={category} />
+          })
         }
-      </ol>
-      {/* Gif item */}
+
     </>
   )
 }
