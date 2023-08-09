@@ -1,6 +1,7 @@
 import { useState } from "react"
+import PropTypes from 'prop-types';
 
-export const AddCategory = () => {
+export const AddCategory = ({ onNewCategory }) => {
 
     const [inputValue, setInputValue] = useState('')
 
@@ -10,11 +11,17 @@ export const AddCategory = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(inputValue)
+        const newInputValue = inputValue.trim()
+
+        if( newInputValue.length <= 3) return;
+
+        // setCategories(categories => [inputValue, ...categories]);
+        onNewCategory(newInputValue)
+        setInputValue('');
     }
 
     return (
-        <form onSubmit={ (e) => onSubmit(e)}>
+        <form onSubmit={ onSubmit }>
             <input 
                 type="text"
                 placeholder="Find gifs..."
@@ -23,4 +30,9 @@ export const AddCategory = () => {
             />
         </form>
     )
+}
+
+
+AddCategory.propTypes ={
+    onNewCategory: PropTypes.func,
 }

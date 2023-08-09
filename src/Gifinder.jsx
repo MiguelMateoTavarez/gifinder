@@ -5,8 +5,12 @@ export const Gifinder = () => {
 
   const [categories, setCategories] = useState(['One Punch', 'Dragon Ball']);
 
-  const onAddCategory = () => {
-    setCategories(['Valorant',...categories]);
+  const onAddCategory = (newCategory) => {
+
+    if(categories.includes(newCategory)) 
+      return;
+      
+    setCategories([newCategory,...categories]);
   }
 
   return (
@@ -15,9 +19,11 @@ export const Gifinder = () => {
       <h1>Gifinder</h1>
 
       {/* Input */}
-      <AddCategory />
+      <AddCategory
+        // setCategories={setCategories} 
+        onNewCategory={(value) => onAddCategory(value)}
+      />
       {/* Gif list */}
-      <button onClick={onAddCategory}>Add</button>
       <ol>
         {
           categories.map(
