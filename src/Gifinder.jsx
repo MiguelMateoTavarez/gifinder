@@ -16,7 +16,7 @@ export const Gifinder = () => {
 
   return (
     <>
-      <h1>Gifinder</h1>
+      <h1>Gi-finder</h1>
 
       <AddCategory
         onNewCategory={(value) => onAddCategory(value)}

@@ -1,11 +1,12 @@
 import { useState } from "react"
 import PropTypes from 'prop-types';
+import { TextField } from "@mui/material";
 
 export const AddCategory = ({ onNewCategory }) => {
 
     const [inputValue, setInputValue] = useState('')
 
-    const onInputChange = ({target}) => {
+    const onInputChange = ({ target }) => {
         setInputValue(target.value);
     }
 
@@ -13,17 +14,20 @@ export const AddCategory = ({ onNewCategory }) => {
         e.preventDefault();
         const newInputValue = inputValue.trim()
 
-        if( newInputValue.length <= 3) return;
+        if (newInputValue.length <= 3) return;
 
         onNewCategory(newInputValue)
         setInputValue('');
     }
 
     return (
-        <form onSubmit={ onSubmit }>
-            <input 
-                type="text"
-                placeholder="Find gifs..."
+        <form onSubmit={onSubmit}>
+            <TextField
+                id="outlined-basic"
+                label="Search gifs"
+                fullWidth
+                color="warning"
+                variant="filled"
                 value={inputValue}
                 onChange={onInputChange}
             />
@@ -32,6 +36,6 @@ export const AddCategory = ({ onNewCategory }) => {
 }
 
 
-AddCategory.propTypes ={
+AddCategory.propTypes = {
     onNewCategory: PropTypes.func,
 }
